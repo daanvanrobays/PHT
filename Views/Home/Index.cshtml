@@ -1,36 +1,69 @@
-﻿@model IEnumerable<PHT.Models.PhtModels.Ploeg>
+﻿@model IEnumerable<PHT.Models.PhtModels.PloegViewModel>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Overzicht";
 }
 
-<h2>Index</h2>
-
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
 <table class="table">
     <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Naam)
+        <th width="5%">
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PintenAantal)
-        </th>
-    </tr>
-    @if (Model != null)
-    {
-        foreach (var item in Model)
+        @if (Request.IsAuthenticated)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Naam)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.PintenAantal)
-                </td>
-            </tr>
+            <th width="80%">
+            </th>
+            <th width="15%">
+            </th>
         }
+        else
+        {
+            <th width="95%">
+            </th>
+        }
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td width="5%">
+                @Html.DisplayFor(modelItem => item.Naam)
+            </td>
+            @if (Request.IsAuthenticated)
+            {
+                <td width="80%">
+                    <div class="progress">
+                        <div class="progress-bar" role="progressbar" aria-valuenow="@item.PintenAantal" aria-valuemin="0" aria-valuemax="2000" style="width: @item.PintenPercentage">
+                            @item.PintenAantal
+                        </div>
+                    </div>
+                </td>
+                <th width="15%">
+                    @using (Html.BeginForm("Edit", "Ploeg", FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Aantal pinten..">
+                            <span class="input-group-btn">
+                                <button class="btn btn-default" type="submit">
+                                    <i class="fa fa-plus" aria-hidden="true"></i>
+                                </button>
+                            </span>
+                        </div>
+                    }
+
+                </th>
+            }
+            else
+            {
+                <td width="95%">
+                    <div class="progress">
+                        <div class="progress-bar" role="progressbar" aria-valuenow="@item.PintenAantal"
+                             aria-valuemin="0" aria-valuemax="2000" style="width:@item.PintenPercentage">
+                        </div>
+                    </div>
+                </td>
+            }
+        </tr>
     }
 
 </table>

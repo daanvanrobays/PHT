@@ -1,50 +1,41 @@
-﻿using Microsoft.AspNet.Identity;
+﻿using PHT.Implementation.Repo;
 using PHT.Models.PhtModels;
-using System;
+using PHT.Repo;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Web;
 using System.Web.Mvc;
 
 namespace PHT.Controllers
 {
     public class HomeController : Controller
     {
+        private IPloegRepo _PloegRepo;
+
+        // GET: Ploeg
         [AllowAnonymous]
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
-            return View();
-        }
+            _PloegRepo = new PloegRepo();
+            var ploegenList = await _PloegRepo.GetPloegen();
 
+            List<PloegViewModel> vmList = new List<PloegViewModel>();
 
-        public ActionResult CreateTeam()
-        {
-            return View();
-        }
-
-        // POST: /Account/Register
-        [HttpPost]
-        [Authorize]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> CreateTeam(PloegViewModel model)
-        {
-            if (ModelState.IsValid)
+            foreach (var item in ploegenList)
             {
-                var ploeg = new Ploeg { Naam = model.Naam, PintenAantal = model.PintenAantal };
-   
+                vmList.Add(PloegMapper(item));
             }
-
-            // If we got this far, something failed, redisplay form
-            return View(model);
+            return View(vmList.OrderByDescending(x => x.PintenAantal));
         }
 
-        private void AddErrors(IdentityResult result)
+        private PloegViewModel PloegMapper(Ploeg ploeg)
         {
-            foreach (var error in result.Errors)
-            {
-                ModelState.AddModelError("", error);
-            }
+            PloegViewModel viewModel = new PloegViewModel();
+            viewModel.Ploeg_ID = ploeg.Ploeg_ID;
+            viewModel.Naam = ploeg.Naam;
+            viewModel.PintenAantal = ploeg.PintenAantal;
+
+            return viewModel;
         }
     }
 }
