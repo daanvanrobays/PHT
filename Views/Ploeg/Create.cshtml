@@ -1,7 +1,7 @@
 ﻿@model PHT.Models.PhtModels.PloegViewModel
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Aanmaken";
 }
 
 @using (Html.BeginForm()) 
@@ -30,14 +30,14 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Aanmaken" class="btn btn-default" />
             </div>
         </div>
     </div>
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Terug naar lijst", "Index")
 </div>
 
 @section Scripts {

@@ -8,6 +8,7 @@ namespace PHT.Models.PhtModels
 {
     public class PloegViewModel
     {
+        [Key]
         [Display(Name = "Ploeg identifier")]
         public Guid Ploeg_ID { get; set; }
 

@@ -22,3 +22,19 @@ select,
 textarea {
     max-width: 280px;
 }
+
+div.black {
+    color:#000 !important;
+}
+
+h5.black-outline {
+    color: #fff !important;
+    text-shadow: 1px 0 0 #000, 0 -1px 0 #000, 0 1px 0 #000, -1px 0 0 #000 !important;
+    margin-left: 5px;
+}
+
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}

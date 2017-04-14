@@ -121,9 +121,8 @@ namespace PHT.Controllers
                 ploeg.PintenAantal += ploeg.PlusPinten;
 
                 _PloegRepo.UpdatePloeg(PloegMapper(ploeg));
-                return RedirectToAction("Index", "Home");
             }
-            return View(PloegMapper(ploeg));
+            return RedirectToAction("Index", "Home");
         }
 
         // GET: Ploeg/Delete/5

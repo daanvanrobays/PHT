@@ -19,7 +19,7 @@
         <th>
             @Html.DisplayNameFor(model => model.PintenAantal)
         </th>
-        <th></th>
+        <th>Acties</th>
     </tr>
 
 @foreach (var item in Model) {
@@ -31,9 +31,9 @@
             @Html.DisplayFor(modelItem => item.PintenAantal)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { ploeg_ID = item.Ploeg_ID }, null) |
+            @Html.ActionLink("Wijzig", "Edit", new { ploeg_ID = item.Ploeg_ID }, null) |
             @Html.ActionLink("Details", "Details", new { ploeg_ID = item.Ploeg_ID }, null) |
-            @Html.ActionLink("Delete", "Delete", new { ploeg_ID = item.Ploeg_ID }, null)
+            @Html.ActionLink("Verwijder", "Delete", new { ploeg_ID = item.Ploeg_ID }, null)
         </td>
     </tr>
 }
